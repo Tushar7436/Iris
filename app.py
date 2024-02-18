@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 
 # Load the model
-model = pickle.load(open('savedmodel.sav', 'rb'))
+model = pickle.load(open('savedmodel.pkl', 'rb'))
 
 def main():
     st.title("Flower Prediction App")
