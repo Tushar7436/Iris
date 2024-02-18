@@ -1,24 +1,20 @@
-from flask import Flask, render_template, request
+import streamlit as st
 import pickle
 
-app = Flask(__name__)
-# load the model
+# Load the model
 model = pickle.load(open('savedmodel.sav', 'rb'))
 
-@app.route('/')
-def home():
-    result = ''
-    return render_template('index.html', **locals())
+def main():
+    st.title("Flower Prediction App")
 
+    sepal_length = st.slider("Sepal Length", 0.0, 10.0)
+    sepal_width = st.slider("Sepal Width", 0.0, 10.0)
+    petal_length = st.slider("Petal Length", 0.0, 10.0)
+    petal_width = st.slider("Petal Width", 0.0, 10.0)
 
-@app.route('/', methods=['POST', 'GET'])
-def predict():
-    sepal_length = float(request.form['sepal_length'])
-    sepal_width = float(request.form['sepal_width'])
-    petal_length = float(request.form['petal_length'])
-    petal_width = float(request.form['petal_width'])
-    result = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])[0]
-    return render_template('index.html', **locals())
+    if st.button("Predict"):
+        result = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])[0]
+        st.success(f"The predicted flower class is {result}")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
