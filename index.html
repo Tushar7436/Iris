@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <body>
+        <form action='/' method="POST">
+            Sepal Length: <input type='text' name='sepal_length'><br>
+            Sepal Width: <input type='text' name='sepal_width'><br>
+            Petal Length: <input type='text' name='petal_length'><br>
+            Petal Width: <input type='text' name='petal_width'><br>
+            <input type='submit' value='predict'>
+        </form>
+        <p>Class: {{ prediction }}</p>
+        <a href="/">Go back</a>
+    </body>
+</head>
+</html>
